@@ -1,0 +1,7 @@
+<RCC>
+    <qresource prefix="/">
+        <file alias="ui/main.qml">ui/main.qml</file>
+        <file alias="ui/MainPage.qml">ui/MainPage.qml</file>
+        <file alias="ui/ExportPage.qml">ui/ExportPage.qml</file>
+    </qresource>
+</RCC>

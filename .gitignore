@@ -1,0 +1,18 @@
+# .gitignore for Qt + CMake + KDE projects
+/build*
+/CMakeCache.txt
+/CMakeFiles/
+/*.user
+*.pro.user
+*.autosave
+*.swp
+*.kate-swp
+*.qmlc
+*.jsc
+*.o
+*.a
+*.so
+*.dll
+*.exe
+*.log
+*.DS_Store

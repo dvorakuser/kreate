@@ -1,0 +1,11 @@
+[Colors%3AButton]
+BackgroundNormal="250,250,250"
+ForegroundNormal="20,20,20"
+
+[Colors%3AWindow]
+BackgroundNormal="239,240,241"
+ForegroundNormal="35,38,41"
+
+[%General]
+ColorScheme=My Theme
+Name=My Theme

@@ -1,0 +1,100 @@
+import QtQuick
+import QtQuick.Controls
+import QtQuick.Dialogs
+import org.kde.kirigami as Kirigami
+import Kreate 1.0
+
+Kirigami.Page {
+    id: root
+    title: "Export"
+
+    // We instantiate the backend here, but you can move it to main.qml if you prefer a global instance
+    property alias builder: builder
+    ColorSchemeBuilder { id: builder }
+
+    Column {
+        id: form
+        spacing: Kirigami.Units.largeSpacing
+        anchors.margins: Kirigami.Units.largeSpacing
+        anchors.fill: parent
+
+        Kirigami.FormLayout {
+            Layout.fillWidth: true
+
+            TextField {
+                Kirigami.FormData.label: "Theme name"
+                text: builder.themeName
+                onTextChanged: builder.themeName = text
+            }
+            TextField {
+                Kirigami.FormData.label: "Author"
+                text: builder.author
+                onTextChanged: builder.author = text
+            }
+            TextField {
+                Kirigami.FormData.label: "Version"
+                text: builder.version
+                onTextChanged: builder.version = text
+            }
+        }
+
+        Row {
+            spacing: Kirigami.Units.smallSpacing
+
+            Button {
+                text: "Load .colors…"
+                onClicked: loadDialog.open()
+            }
+            Button {
+                text: "Save .colors…"
+                onClicked: saveDialog.open()
+            }
+        }
+
+        Kirigami.InlineMessage {
+            id: status
+            visible: false
+            type: Kirigami.MessageType.Positive
+            text: ""
+        }
+        Kirigami.InlineMessage {
+            id: errorMsg
+            visible: false
+            type: Kirigami.MessageType.Error
+            text: ""
+        }
+    }
+
+    FileDialog {
+        id: loadDialog
+        title: "Open KDE .colors"
+        fileMode: FileDialog.OpenFile
+        nameFilters: [ "KDE Color Scheme (*.colors)", "All files (*)" ]
+        onAccepted: {
+            const p = selectedFile.toString().replace("file://", "")
+            const ok = builder.loadColorsFile(p)
+            status.visible = ok
+            status.text = ok ? "Loaded color scheme." : ""
+            errorMsg.visible = !ok
+            errorMsg.text = ok ? "" : "Failed to load color scheme."
+        }
+    }
+
+    FileDialog {
+        id: saveDialog
+        title: "Save KDE .colors"
+        fileMode: FileDialog.SaveFile
+        nameFilters: [ "KDE Color Scheme (*.colors)" ]
+        onAccepted: {
+            let p = selectedFile.toString().replace("file://", "")
+            if (!p.endsWith(".colors"))
+                p += ".colors"
+                const ok = builder.saveColorsFile(p)
+                status.visible = ok
+                status.text = ok ? "Saved color scheme." : ""
+                errorMsg.visible = !ok
+                errorMsg.text = ok ? "" : "Failed to save color scheme."
+                if (ok) Kirigami.ApplicationWindow.window.showPassiveNotification("Saved .colors")
+        }
+    }
+}

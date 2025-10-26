@@ -1,0 +1,156 @@
+Absolutely — here’s a polished **`README.md`** for **Kreate – The KDE Theme Studio**, written in a style suitable for GitHub or KDE Invent:
+
+---
+
+```markdown
+# 🎨 Kreate – The KDE Theme Studio
+
+**Kreate** is a modern, open-source application for designing, validating, and exporting complete **KDE Plasma 6 themes**.
+It gives both designers and everyday users the power to create beautiful, fully compatible Plasma themes — no manual file editing required.
+
+---
+
+## ✨ Features
+
+- 🖌️ **Visual Theme Builder** – Design your own Plasma color schemes with interactive color pickers.
+- 🧩 **Live Preview** – See exactly how your windows, buttons, tooltips, and panels will look in real time.
+- 🧮 **Theme Validator** – Automatically checks for missing colors, metadata errors, and compatibility issues.
+- 📦 **One-Click Export** – Generate a complete, installable `.zip` theme package for Plasma 6.
+- ⚙️ **Built-in Installer** – Instantly apply your new theme using `kpackagetool6` and `lookandfeeltool`.
+- 💡 **Adaptive Kirigami UI** – A clean, responsive interface built with KDE Frameworks 6 and Qt 6.
+
+---
+
+## 🧱 Project Structure
+
+```
+
+kreate/
+├── CMakeLists.txt
+├── resources.qrc
+├── templates/
+│   └── metadata_kde6.json
+└── src/
+├── main.cpp
+├── backend/
+│   ├── colorschemebuilder.{h,cpp}
+│   ├── validator.{h,cpp}
+│   ├── packagewriter.{h,cpp}
+│   └── themeinstaller.{h,cpp}
+└── ui/
+├── main.qml
+├── ThemeEditor.qml
+├── ExportPage.qml
+├── PreviewPane.qml
+└── ColorPicker.qml
+
+````
+
+---
+
+## 🧰 Requirements
+
+- **Kubuntu / KDE Plasma 6.0+**
+- **Qt 6.6 or newer**
+- **KDE Frameworks 6** (Kirigami, Config, CoreAddons, I18n, Package)
+
+Install build dependencies (Debian/Ubuntu-based):
+```bash
+sudo apt install cmake extra-cmake-modules qt6-base-dev qt6-declarative-dev \
+    libkf6kirigami-dev libkf6i18n-dev libkf6config-dev libkf6coreaddons-dev \
+    libkf6package-dev plasma-sdk kpackagetool6
+````
+
+---
+
+## 🏗️ Building Kreate
+
+```bash
+git clone https://github.com/yourusername/kreate.git
+cd kreate
+mkdir build && cd build
+cmake ..
+make -j$(nproc)
+```
+
+---
+
+## 🚀 Running Kreate
+
+```bash
+./kreate
+```
+
+By default, exported themes are saved in:
+
+```
+~/.local/share/kreate/build_output/
+```
+
+---
+
+## 🪄 How to Use
+
+1. **Open Kreate**
+
+   * Start from the “Theme Editor” tab to set your theme name, author, and version.
+2. **Design**
+
+   * Choose colors for Window, View, Selection, and Tooltip groups.
+3. **Preview**
+
+   * See your theme applied live in the “Preview” tab.
+4. **Validate**
+
+   * Use “Validate Theme” to check for any missing components.
+5. **Export & Install**
+
+   * Create an installable `.zip` package or apply it directly with one click.
+
+---
+
+## 🧩 Output Example
+
+```
+build_output/
+└── org.kde.mytheme/
+    ├── metadata.json
+    ├── colors/
+    │   └── org.kde.mytheme.colors
+    ├── plasma/
+    │   └── desktoptheme/
+    └── org.kde.mytheme.zip
+```
+
+---
+
+## 🛠️ Technical Overview
+
+* **Language:** C++17 / QML
+* **UI Toolkit:** Kirigami 3 (KDE Frameworks 6)
+* **Backends:**
+
+  * `ColorSchemeBuilder` – handles .colors file creation
+  * `Validator` – checks structure and metadata integrity
+  * `PackageWriter` – builds installable packages
+  * `ThemeInstaller` – applies themes via system tools
+
+---
+
+## 🧑‍💻 Contributing
+
+Contributions, pull requests, and translations are always welcome!
+If you find a bug or have an idea, open an issue or share your concept on the KDE GitLab.
+
+---
+
+## 📜 License
+
+Licensed under the **GPL-3.0-or-later**.
+Copyright © 2025 Thomas Lee.
+
+---
+
+> *“Design your desktop, your way — with Kreate.”*
+
+```
