@@ -2,40 +2,51 @@
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
 
-#include "backend/colorschemebuilder.h"
-#include "backend/metadatawriter.h"
-#include "backend/validator.h"
-#include "backend/packagewriter.h"
+#include <KLocalizedContext>
+#include <KLocalizedString>
+
+#include "core/ColorSchemeBuilder.h"
+#include "core/WallpaperAnalyzer.h"
+#include "io/WallpaperLoader.h"
 
 int main(int argc, char *argv[])
 {
     QGuiApplication app(argc, argv);
-    app.setApplicationName(QStringLiteral("Kreate"));
-    app.setOrganizationName(QStringLiteral("MiraCostaCSIT"));
-    app.setOrganizationDomain(QStringLiteral("edu.miracosta.csit.kreate"));
+
+    KLocalizedString::setApplicationDomain("kreate");
+
+    // --- Register singletons and QML types ---
+    qmlRegisterSingletonType<ColorSchemeBuilder>(
+        "Kreate", 1, 0, "ColorBuilder",
+        [](QQmlEngine*, QJSEngine*) -> QObject* {
+            return new ColorSchemeBuilder();
+        }
+    );
+
+    qmlRegisterSingletonType<WallpaperAnalyzer>(
+        "Kreate", 1, 0, "WallpaperAnalyzer",
+        [](QQmlEngine*, QJSEngine*) -> QObject* {
+            return new WallpaperAnalyzer();
+        }
+    );
+
+    qmlRegisterType<WallpaperLoader>("Kreate", 1, 0, "WallpaperLoader");
 
     QQmlApplicationEngine engine;
 
-    // Register our backend with QML
-    qmlRegisterType<ColorSchemeBuilder>("Kreate", 1, 0, "ColorSchemeBuilder");
-    qmlRegisterType<MetadataWriter>("Kreate.Backend", 1, 0, "MetadataWriter");
-    qmlRegisterType<Validator>("Kreate", 1, 0, "Validator");
-    qmlRegisterType<PackageWriter>("Kreate", 1, 0, "PackageWriter");
+    engine.rootContext()->setContextObject(new KLocalizedContext(&engine));
 
+    const QUrl url(QStringLiteral("qrc:/qt/qml/Kreate/main.qml"));
 
-    const QUrl mainUrl(QStringLiteral("qrc:/ui/main.qml"));
     QObject::connect(
-        &engine,
-        &QQmlApplicationEngine::objectCreated,
-        &app,
-        [mainUrl](QObject *obj, const QUrl &objUrl) {
-            if (!obj && objUrl == mainUrl)
+        &engine, &QQmlApplicationEngine::objectCreated,
+        &app, [url](QObject *obj, const QUrl &objUrl) {
+            if (!obj && objUrl == url)
                 QCoreApplication::exit(-1);
         },
         Qt::QueuedConnection
     );
 
-    engine.load(mainUrl);
-
+    engine.load(url);
     return app.exec();
 }

@@ -1,5 +1,9 @@
 <RCC>
-    <qresource prefix="/">
-        <file>ui/MainPage.qml</file>
+    <qresource prefix="/qt/qml/Kreate">
+        <file alias="main.qml">src/ui/qml/main.qml</file>
+        <file alias="OverviewPage.qml">src/ui/qml/OverviewPage.qml</file>
+        <file alias="ColorEditor.qml">src/ui/qml/ColorEditor.qml</file>
+        <file alias="ExportPage.qml">src/ui/qml/ExportPage.qml</file>
+        <file alias="ThemePreview.qml">src/ui/qml/ThemePreview.qml</file>
     </qresource>
 </RCC>
