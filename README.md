@@ -28,15 +28,21 @@ CMake-built KF6 application
 🧱 Build Instructions (Kubuntu 24.04+ / KDE Neon)
 
 Dependencies:
+
 sudo apt install qt6-base-dev qt6-declarative-dev qt6-tools-dev \
                  libkf6config-dev libkf6i18n-dev libkf6kirigami-dev \
                  libkf6coreaddons-dev libkf6package-dev cmake build-essential
 
 Compile & Run:
+
 git clone https://github.com/DvorakUser/Kreate.git
+
 cd Kreate
+
 cmake -B build -S . -DCMAKE_BUILD_TYPE=Release
+
 cmake --build build
+
 ./build/kreate
 
 ---
