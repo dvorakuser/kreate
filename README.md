@@ -64,10 +64,7 @@ SVG Plasma theme editing, wallpaper studio, templates.
 Phase 5 — Theme Management (Design stage)
 Local theme browser, metadata handling, KDE Store integration.
 
-Phase 6 — AI-Assisted Creation (Conceptual)
-Natural language theme generation, auto-color harmony.
-
-Phase 7 — Kreate Web Studio (Future)
+Phase 6 —  Kreate Web Studio (Future)
 WebAssembly build, cloud sync, collaborative editing.
 
 ---
